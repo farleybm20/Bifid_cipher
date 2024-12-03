@@ -1,3 +1,8 @@
+import string
+
+def clean_text(text):
+    return ''.join(char.upper() for char in text if char.isalpha())
+
 def create_polybius_square(key):
     key = key.upper().replace('J', 'I')  
     key = ''.join(sorted(set(key), key=key.index))  
@@ -22,6 +27,7 @@ def find_coordinates(square, char):
     return None
 
 def bifid_encrypt(plaintext, key, period):
+    plaintext = clean_text(plaintext)
     square = create_polybius_square(key)
     plaintext = plaintext.upper().replace('J', 'I').replace(' ', '')
 
@@ -67,7 +73,7 @@ def bifid_decrypt(ciphertext, key, period):
     return plaintext
 
 
-# # Example usage
+
 if __name__ == "__main__":
     mode = input("Enter mode (encrypt/decrypt): ").strip().lower()
     message = input("Enter the message: ").strip()
